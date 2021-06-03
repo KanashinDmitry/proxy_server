@@ -72,9 +72,18 @@ class ProxyServer:
     def run_http_handle(self, request, client, server_socket):
         server_socket.sendall(request["orig_data"])
 
-        response = server_socket.recv(self.buf_length)
+        while True:
+            response = server_socket.recv(self.buf_length)
+
+            try:
+                client.sendall(response)
+            except Exception as e:
+                print(f'Connection with client was destroyed')
+                server_socket.close()
+                client.close()
+                return
+
         server_socket.close()
-        client.sendall(response)
         client.close()
 
     def run_https_messaging(self, request, client, server_socket):
