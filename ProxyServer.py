@@ -70,7 +70,6 @@ class ProxyServer:
     def run_https_messaging(self, request, client, server_socket):
         client.sendall(CONNECTION_RESPONSE.encode())
 
-        #
         client.setblocking(False)
         server_socket.setblocking(False)
 
