@@ -54,20 +54,23 @@ class ProxyServer:
     def run_http_handle(self, request, client, server_socket):
         server_socket.sendall(request["orig_data"])
 
+        response = b''
         while True:
-            response = server_socket.recv(self.buf_length)
+            chunk = server_socket.recv(self.buf_length)
 
-            if not response:
+            if not chunk:
                 break
 
-            client.sendall(response)
+            response += chunk
 
+        client.sendall(response)
         server_socket.close()
         client.close()
 
     def run_https_messaging(self, request, client, server_socket):
         client.sendall(CONNECTION_RESPONSE.encode())
 
+        #
         client.setblocking(False)
         server_socket.setblocking(False)
 
