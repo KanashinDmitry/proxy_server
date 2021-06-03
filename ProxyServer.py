@@ -33,9 +33,9 @@ class ProxyServer:
         data_from_client = client.recv(self.buf_length)
         request = RequestParser.parse_request(data_from_client)
 
-        self.send_to_server(request, client)
+        self.choose_messaging_handler(request, client)
 
-    def send_to_server(self, request, client):
+    def choose_messaging_handler(self, request, client):
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         try:

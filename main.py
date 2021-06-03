@@ -5,8 +5,8 @@ DEFAULT_PORT = 5000
 
 
 def main():
-    host_addr = input("Put ip address (or put '-' for default value (0.0.0.0)): ")
-    port = input("Put port (or put '-' for default value (5000)): ")
+    host_addr = input("Type ip address (or type '-' for default value (0.0.0.0)): ")
+    port = input("Type port (or type '-' for default value (5000)): ")
 
     try:
         if port != '-':
