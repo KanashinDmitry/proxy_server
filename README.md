@@ -1,1 +1,3 @@
-# proxy_server
+# HTTP Proxy server
+
+Run with ```python main.py```
