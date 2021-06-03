@@ -36,7 +36,7 @@ class ProxyServer:
 
     def run_server(self, ip="0.0.0.0", port=5000):
         self.listening_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.listening_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
+        self.listening_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
         self.listening_socket.bind((ip, port))
         self.listening_socket.listen(20)
