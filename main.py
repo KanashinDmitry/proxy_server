@@ -75,6 +75,9 @@ class ProxyServer:
         while True:
             response = server_socket.recv(self.buf_length)
 
+            if not response:
+                break
+
             try:
                 client.sendall(response)
             except Exception as e:
@@ -120,8 +123,8 @@ class ProxyServer:
 
 
 if __name__ == '__main__':
-    host_addr = input("Put ip address (or put '-' for default values): ")
-    port = input("Put port (or put '-' for default values): ")
+    host_addr = input("Put ip address (or put '-' for default value (0.0.0.0)): ")
+    port = input("Put port (or put '-' for default value (5000)): ")
 
     try:
         if port != '-':
@@ -129,7 +132,7 @@ if __name__ == '__main__':
         else:
             port = DEFAULT_PORT
     except:
-        print("Port value should be number")
+        print("Port value must be a number")
         exit(1)
 
     if host_addr == '-':
