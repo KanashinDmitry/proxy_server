@@ -54,16 +54,14 @@ class ProxyServer:
     def run_http_handle(self, request, client, server_socket):
         server_socket.sendall(request["orig_data"])
 
-        response = b''
         while True:
-            chunk = server_socket.recv(self.buf_length)
+            response = server_socket.recv(self.buf_length)
 
-            if not chunk:
+            if not response:
                 break
 
-            response += chunk
+            client.sendall(response)
 
-        client.sendall(response)
         server_socket.close()
         client.close()
 
